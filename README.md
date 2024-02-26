@@ -20,7 +20,7 @@ An e-paper display seemed ideal for this as it would only need to update relativ
 
 Because this was going to be sat on my desk, I only want / need it to show the time during by working hours (and to act as a prompt to tell me to stop working at the appropriate hour), so to reduce the number of [display refreshes*](#caveats) the script will write a status value to a text file (`work-clock-status.txt`) each time it runs, and will check the status next time it runs in order to see if it needs to update the display or not.
 
-You will need to update the following value in your [`work-clock.py`](work-clock.py#L37) file:
+You will need to update the following value in your [`work-clock.py`](work-clock.py#L42) file:
 
 ```
 status_file = "/path/to/your/script/work-clock-status.txt"
