@@ -79,7 +79,7 @@ Obviously you will need to substitute the correct path to the file on your devic
 
 I believe that the Inky pHAT e-paper display is rated for about 100,000 refresh cycles - this means that if the clock script refreshes the display 12 times an hour, 9 hours per day, 5 days a week, it will potentially burn out the display in around 185 weeks (three and a half years).
 
-If it was running every 5 minutes without non-working / weekend days then it would burn it out in just under a year!
+If it was running every 5 minutes without non-working / weekend days then it would potentially burn it out in just under a year!
 
 # Acknowledgements
 
