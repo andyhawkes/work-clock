@@ -13,7 +13,11 @@ import sys
 # Get arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--timezone', '-t', type=str, required=False, help="Your desired timezone e.g. Europe/London")
-parser.add_argument('--rotation', '-r', type=str, required=False, help="The rotation of your screen e.g. 270. Defaults to 90")
+parser.add_argument('--rotation', '-r', type=int, required=False, help="The rotation of your screen e.g. 270. Defaults to 90")
+parser.add_argument('--days', '-d', type=str, required=False, help="Non-working days as a comma-separated list. Monday = 0, Sunday = 6")
+parser.add_argument('--start', '-s', type=int, required=False, choices=range(0, 23), help="The hour of the day when work starts e.g. 9")
+parser.add_argument('--end', '-e', type=int, required=False, choices=range(0, 23), help="The hour of the day when work stops e.g. 18")
+
 args, _ = parser.parse_known_args()
 
 # Set screen rotation from "rotation" argument or fall back to default
@@ -27,11 +31,12 @@ timezone = args.timezone or 'Europe/London'
 tz = pytz.timezone(timezone)
 localtime = datetime.now(tz)
 
-# Define non-work days
-weekend_days = {5,6}
-# Define work day start and end times (hours)
-workday_start = 9
-workday_end = 18
+# Set the weekend / non-working days from "days" argument or fall back to default
+weekend_days = set(args.days.split(',')) if args.days is not None else {5,6}
+
+# Define work day start and end times (hours) from "start" and "end" arguments, or fall back to defaults
+workday_start = args.start or 9
+workday_end = args.end or 17
 
 # Location of status file containing clock status from last execution
 status_file = "/path/to/your/script/work-clock-status.txt"

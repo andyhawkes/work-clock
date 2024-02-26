@@ -20,7 +20,7 @@ An e-paper display seemed ideal for this as it would only need to update relativ
 
 Because this was going to be sat on my desk, I only want / need it to show the time during by working hours (and to act as a prompt to tell me to stop working at the appropriate hour), so to reduce the number of [display refreshes*](#caveats) the script will write a status value to a text file (`work-clock-status.txt`) each time it runs, and will check the status next time it runs in order to see if it needs to update the display or not.
 
-You will need to update the following value in your `work-clock.py` file:
+You will need to update the following value in your [`work-clock.py`](work-clock.py#L37) file:
 
 ```
 status_file = "/path/to/your/script/work-clock-status.txt"
@@ -28,7 +28,7 @@ status_file = "/path/to/your/script/work-clock-status.txt"
 
 You will need to use the full path, as the clock will ultimately be run by a [cron job](#automation).
 
-By default, the clock will only update between 09:00 and 18:00, Monday to Friday - this can be edited in [lines 31 to 34 of `work-clock.py`](work-clock.py#L31-L34) but [this will eventually be made configurable via an argument when running the script](#to-do).
+By default, the clock will only update between 09:00 and 17:00, Monday to Friday - this can be set via [arguments passed to the Python script](#arguments) or the defaults can be edited in [lines 34 to 39 of `work-clock.py`](work-clock.py#L34-L39).
 
 Outside of those times it will display either:
 
@@ -47,10 +47,21 @@ The script should be run with Python 3.
 python3 work-clock.py
 ```
 
-There are two optional parameters that can be passed in to make the configuration easier:
+## Arguments
+
+There are optional parameters that can be passed in to make the configuration easier:
 
 * `--timezone, -t` - a [timezone string](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) e.g. "Eurpoe/Prague" Default is `Europe/London`.
 * `--rotation, -r` - a rotation value for the screen in degrees. On a Pi Zero 90 = USB's at the top, 270 = USBs at the bottom. Default is `90`.
+* `--days, -d` - a comma-separated list of non working days. 0=Monday, 6 = Sunday. Default is `5,6`.
+* `--start, -s` - the hour of the day when work starts. Default is `9`.
+* `--end, -e` - the hour of the day when work finishes. Default is `17`.
+
+For example:
+
+```
+python3 work-clock.py -t "Asia/Brunei" -r 270 -d "4,5" -s 10 -e 18
+```
 
 ## Automation
 
@@ -76,5 +87,4 @@ Hat tip to the good people at Pimoroni for the [Inky Python library](https://git
 
 # To do
 
-* Add starting and ending times to the supported arguments to make them easily configurable.
-* Add non-working days to the supported arguments to make them easily configurable.
+* Consider making the start and end times more granular (i.e. down to the minute)
