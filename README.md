@@ -28,7 +28,7 @@ status_file = "/path/to/your/script/work-clock-status.txt"
 
 You will need to use the full path, as the clock will ultimately be run by a [cron job](#automation).
 
-By default, the clock will only update between 09:00 and 18:00, Monday to Friday - this can be edited in [lines 31 to 34 of `work-clock.py`](work-clock.py#L31-34) but [this will eventually be made configurable via an argument when running the script](#to-do).
+By default, the clock will only update between 09:00 and 18:00, Monday to Friday - this can be edited in [lines 31 to 34 of `work-clock.py`](work-clock.py#L31-L34) but [this will eventually be made configurable via an argument when running the script](#to-do).
 
 Outside of those times it will display either:
 
